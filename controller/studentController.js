@@ -28,7 +28,13 @@ const addStudent = async (req, res) => {
     await student.save();
     res
       .status(201)
-      .json({ success: true, message: "Student created successfully", data: student, });
+      .json({ success: true, message: "Student created successfully", data: {
+        _id: student._id,
+        name: student.fullName,
+        studentCode: student.studentCode,
+        isActive: student.isActive,
+      }, 
+    });
   } catch (error) {
     console.log(error);
     res.status(400).json({ success: false, message: "Student created failed" });
